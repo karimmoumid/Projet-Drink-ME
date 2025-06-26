@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paramètres{% endblock %}
+
+{% block body %}
+    <div class="container py-4">
+        <h1 class="mb-4">Services</h1>
+
+        <article class="mb-5">
+            <h2 class="mb-3">Comptes pro</h2>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a href="{{ path('app_user_list') }}" class="text-decoration-none">Liste des comptes pro</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{{ path('app_register', {'role': 'employee'}) }}" class="text-decoration-none">Création d'un compte employé</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{{ path('app_register', {'role': 'admin'}) }}" class="text-decoration-none">Création d'un compte admin</a>
+                </li>
+            </ul>
+        </article>
+
+        <article>
+            {# Contenu vide pour l'instant, tu peux ajouter ici #}
+        </article>
+    </div>
+{% endblock %}

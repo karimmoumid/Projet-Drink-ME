@@ -1,6 +1,0 @@
-{
-    "require": {
-        "symfony/asset-mapper": "^7.3",
-        "symfony/webpack-encore-bundle": "^2.2"
-    }
-}

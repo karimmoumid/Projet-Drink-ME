@@ -1,12 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Création d'un compte{% endblock %}
 
 {% block body %}
-    <h1>Enregistrement</h1>
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                {% if role == 'customer' %}
+                    <h1 class="mb-4 text-center">Enregistrement</h1>
+                {% elseif role == 'employee' or role == 'admin' %}
+                    <h1 class="mb-4 text-center">Création d'un compte professionnel</h1>
+                {% endif %}
 
-    {{ form_errors(registrationForm) }}
+                <div class="card shadow-sm p-4">
+                    {% if form_errors(registrationForm) %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(registrationForm) }}
+                        </div>
+                    {% endif %}
 
-    {{ form(registrationForm) }}
+                    {{ form_start(registrationForm, {'attr': {'class': 'needs-validation'}}) }}
 
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.famillyname) }}
+                        {{ form_widget(registrationForm.famillyname, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.famillyname) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.firstname) }}
+                        {{ form_widget(registrationForm.firstname, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.firstname) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.email) }}
+                        {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.email) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.plainPassword) }}
+                        {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.plainPassword) }}
+                    </div>
+
+                    {% if registrationForm.agreeTerms is defined %}
+                        <div class="form-check mb-3">
+                            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                            {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                            {{ form_errors(registrationForm.agreeTerms) }}
+                        </div>
+                    {% endif %}
+
+                    <div class="d-grid mt-3">
+                        <button type="submit" class="btn btn-primary">Créer le compte</button>
+                    </div>
+
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </main>
 {% endblock %}

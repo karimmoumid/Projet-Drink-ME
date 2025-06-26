@@ -60,6 +60,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Adress::class, mappedBy: 'users')]
     private Collection $adress;
 
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $token = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $password_requested_at = null;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -244,6 +250,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $adress->setUsers(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): static
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getPasswordRequestedAt(): ?\DateTimeImmutable
+    {
+        return $this->password_requested_at;
+    }
+
+    public function setPasswordRequestedAt(?\DateTimeImmutable $password_requested_at): static
+    {
+        $this->password_requested_at = $password_requested_at;
 
         return $this;
     }

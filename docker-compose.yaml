@@ -22,7 +22,7 @@ services:
   phpmyadmin:
     image: phpmyadmin
     environment:
-      PMA_HOST: database # Nom du service de base de données
+      PMA_HOST: database # Nom du Service de base de données
       PMA_USER: root
       PMA_PASSWORD: cequejeveux # MYSQL_ROOT_PASSWORD
     ports:

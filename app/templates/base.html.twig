@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-scale=1.0, maximal-scale=1.0">
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
@@ -81,22 +82,30 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ path('app_main') }}">Accueil</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Mes adresses</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Commandes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_user') }}">Pramétres de mon compte</a>
-                        </li>
                         {% if app.user %}
+                            {% if is_granted('ROLE_EMPLOYEE') %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_user_params') }}">Services</a>
+                                </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Mes adresses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Commandes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_user') }}">Pramétres du compte</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_logout') }}">Deconnexion</a>
                             </li>
                             {% else %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_register',{'role':'customer'}) }}">S'inscrire</a>
                                 </li>
                         {% endif %}
 
@@ -115,13 +124,13 @@
         <img src="media/LOGO DRINK ME 1.png" alt="">
         <article>
             <h2>SERVICE</h2>
-            <p>FAQ</p>
+            <a href="{{ path('app_main_faq') }}">FAQ</a>
             <p>CONTACT</p>
         </article>
         <article>
             <h2>A PROPOS</h2>
-            <p>A propos de nous</p>
-            <p>Ingrédients</p>
+            <a href="{{ path('app_main') }}#apropos">À propos de nous</a>
+            <a href="{{ path('app_main_ingredient') }}">Ingrédients</a>
         </article>
         <article>
             <h2>SHOP</h2>
@@ -132,9 +141,9 @@
         </article>
         <article>
             <h2>LEGAL</h2>
-            <p>Mentions Legales</p>
-            <p>CGV</p>
-            <p>Politique de confidentialité</p>
+            <a href="{{ path('app_main_mentions') }}">Mentions légal</a>
+            <a href="{{ path('app_main_cgv') }}">CGV</a>
+            <a href="{{ path('app_main_politique') }}">Politique de confidentialité</a>
         </article>
         <div>
             <h2>FOLLOW US</h2>

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des comptes professionnels{% endblock %}
+
+{% block body %}
+    <main class="container py-4">
+        <h1 class="mb-4">Liste des comptes professionnels</h1>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for user in users %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ user.firstname }} {{ user.famillyname }}</h5>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <form method="post"
+                                      action="{{ path('app_user_delete', {'id': user.id}) }}"
+                                      onsubmit="return confirm('Voulez-vous vraiment supprimer ce compte ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete-user' ~ user.id) }}">
+                                    <button class="btn btn-danger btn-sm" type="submit">🗑️ Supprimer</button>
+                                </form>
+                                <a href="{{ path('app_user_modify', {'id': user.id}) }}" class="btn btn-primary btn-sm">📝 Modifier</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-info">Aucun utilisateur trouvé.</div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-4">
+            {{ knp_pagination_render(users) }}
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Foire aux Questions - DrinkMe{% endblock %}
+
+{% block body %}
+<main class="container mt-5">
+    <h1 class="mb-4">Foire aux Questions</h1>
+
+    <div class="accordion" id="faqAccordion">
+        <!-- Question 1 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                    🔋 De quoi est composée votre boisson ?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Nos boissons sont 100% naturelles, sans sucre ajouté, et enrichies en vitamines B, caféine naturelle et extraits de plantes comme le guarana et le ginseng.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                    🚚 Livrez-vous partout en France ?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Oui ! Nous livrons dans toute la France métropolitaine sous 48 à 72h. Livraison gratuite dès 50 € d'achat.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                    💳 Quels moyens de paiement acceptez-vous ?
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Nous acceptons les paiements par carte bancaire (Visa, Mastercard), PayPal et Apple Pay.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                    🧊 Peut-on consommer DrinkMe tous les jours ?
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    DrinkMe est formulée pour un usage quotidien raisonnable. Nous recommandons 1 à 2 canettes par jour max pour rester dans un équilibre sain.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+{% endblock %}

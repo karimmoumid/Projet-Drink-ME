@@ -1,75 +1,93 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Accueil - DrinkMe{% endblock %}
+
 {% block body %}
-    <main id="main_index">
-        <section id="hero">
-            <h2>Faites l'expérience de l'énergie pure dans sa forme la plus luxueuse</h2>
-            <p>Conçu pour ceux qui exigent l'excellence, DrinkMe offre une énergie inégalée avec un goût sophistiqué.
+    <main class="container-fluid p-0 m-0" id="main_index">
+
+        <!-- Hero Section -->
+        <section id="hero" class="text-center py-5 bg-light ">
+            <h2 class="mb-4">Faites l'expérience de l'énergie pure dans sa forme la plus luxueuse</h2>
+            <p class="lead mb-4">
+                Conçu pour ceux qui exigent l'excellence, DrinkMe offre une énergie inégalée avec un goût sophistiqué.
             </p>
-            <button><a href="">Découvrez maintenant</a></button>
+            <a href="{{ path('app_main') }}#categorie" class="btn btn-lg px-4">Découvrez maintenant</a>
         </section>
-        <section id="qualite">
-            <article>
-                <img src="{{ asset('media/iconamoon_component-fill.png') }}" alt="">
-                <h2>Ingrédients de première qualité</h2>
+
+        <!-- Qualité Section -->
+        <section id="qualite" class="row text-center p-0 m-0">
+            <article class="col-md-4 mb-4">
+                <img src="{{ asset('media/iconamoon_component-fill.png') }}" alt="Ingrédients de première qualité" class="mb-3" style="max-width: 100px;">
+                <h3>Ingrédients de première qualité</h3>
                 <p>Extraits directement du désert de la fatigue pour un tsunami d'énergie !</p>
             </article>
-            <article>
-                <img src="{{ asset('media/Vector (1).png') }}" alt="">
-                <h2>Formule améliorée</h2>
+            <article class="col-md-4 mb-4">
+                <img src="{{ asset('media/Vector (1).png') }}" alt="Formule améliorée" class="mb-3" style="max-width: 100px;">
+                <h3>Formule améliorée</h3>
                 <p>Développée en laboratoire pour transformer même votre sieste en marathon de productivité !</p>
             </article>
-            <article>
-                <img src="{{ asset('media/iconamoon_certificate-badge.png') }}" alt="">
-                <h2>Édition limitée </h2>
-                <p>Des lots exclusifs pour les véritables chasseurs de performance, parce que le ‘normal’ c'est pour les
-                    amateurs !</p>
+            <article class="col-md-4 mb-4">
+                <img src="{{ asset('media/iconamoon_certificate-badge.png') }}" alt="Édition limitée" class="mb-3" style="max-width: 100px;">
+                <h3>Édition limitée</h3>
+                <p>Des lots exclusifs pour les véritables chasseurs de performance, parce que le ‘normal’ c'est pour les amateurs !</p>
             </article>
         </section>
-        <section id="categorie">
-            <h2>Nos catégories</h2>
-            <article>
-                <div>
-                    <img src="{{ asset('media/Image.png') }}" alt="">
-                </div>
-                <p>texte</p>
-                <p>$0</p>
-                <p>body text.</p>
-            </article>
-            <article>
-                <img src="" alt="">
-                <p></p>
-                <p></p>
-                <p></p>
-            </article>
-            <article>
-                <img src="" alt="">
-                <p></p>
-                <p></p>
-                <p></p>
-            </article>
-            <article>
-                <img src="" alt="">
-                <p></p>
-                <p></p>
-                <p></p>
-            </article>
-        </section>
-        <section id="apropos">
 
-            <div>
-                <h2>A propos de nous:</h2>
+        <!-- Catégorie Section -->
+        <section id="categorie" class="">
+            <h2 class="text-center mb-4">Nos catégories</h2>
+            <div class="row">
+                <article class="col-sm-6 col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="{{ asset('media/Image.png') }}" class="card-img-top" alt="Catégorie 1">
+                        <div class="card-body">
+                            <p class="card-text">Texte catégorie 1</p>
+                            <p class="fw-bold">$0</p>
+                            <p class="card-text">Description courte.</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="col-sm-6 col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="{{ asset('media/image2.png') }}" class="card-img-top" alt="Catégorie 2">
+                        <div class="card-body">
+                            <p class="card-text">Texte catégorie 2</p>
+                            <p class="fw-bold">$XX</p>
+                            <p class="card-text">Description courte.</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="col-sm-6 col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="{{ asset('media/image3.png') }}" class="card-img-top" alt="Catégorie 3">
+                        <div class="card-body">
+                            <p class="card-text">Texte catégorie 3</p>
+                            <p class="fw-bold">$XX</p>
+                            <p class="card-text">Description courte.</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="col-sm-6 col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="{{ asset('media/image4.png') }}" class="card-img-top" alt="Catégorie 4">
+                        <div class="card-body">
+                            <p class="card-text">Texte catégorie 4</p>
+                            <p class="fw-bold">$XX</p>
+                            <p class="card-text">Description courte.</p>
+                        </div>
+                    </div>
+                </article>
             </div>
-            <p>
-                <span>Chez DrinkMe, on a un credo : "Dormir c’est pour les faibles." 😎</span>
-
-                <span>Besoin d’un boost pour affronter la journée ? </span>
-
-                <span>On a ce qu'il te faut : une boisson énergisante 100% naturelle, qui te garde éveillé, concentré et
-                    prêt à conquérir le monde.</span>
-
-                <span>Plus de sieste, plus d'excuses. DrinkMe, c’est l’énergie qui n’attend pas.</span>
-            </p>
         </section>
+
+        <!-- À propos Section -->
+        <section id="apropos" class="bg-light  p-4">
+            <h2 class="mb-4 text-center">À propos de nous</h2>
+            <p>Chez DrinkMe, on a un credo : <strong>"Dormir c’est pour les faibles."</strong> 😎</p>
+            <p>Besoin d’un boost pour affronter la journée ?</p>
+            <p>On a ce qu'il te faut : une boisson énergisante 100% naturelle, qui te garde éveillé, concentré et prêt à conquérir le monde.</p>
+            <p>Plus de sieste, plus d'excuses. DrinkMe, c’est l’énergie qui n’attend pas.</p>
+        </section>
+
     </main>
 {% endblock %}

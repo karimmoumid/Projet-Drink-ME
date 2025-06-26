@@ -1,42 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Adress{% endblock %}
+{% block title %}Adresse{% endblock %}
 
 {% block body %}
-    <h1>Adress</h1>
+    <div class="container my-4">
+        <h1 class="mb-4 text-center">Détails de l'adresse</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ adress.id }}</td>
-            </tr>
-            <tr>
-                <th>Postal_code</th>
-                <td>{{ adress.postalCode }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ adress.city }}</td>
-            </tr>
-            <tr>
-                <th>Street</th>
-                <td>{{ adress.street }}</td>
-            </tr>
-            <tr>
-                <th>Apt</th>
-                <td>{{ adress.apt }}</td>
-            </tr>
-            <tr>
-                <th>Number</th>
-                <td>{{ adress.number }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_adress_index') }}">back to list</a>
-
-    <a href="{{ path('app_adress_edit', {'id': adress.id}) }}">edit</a>
-
-    {{ include('adress/_delete_form.html.twig') }}
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <table class="table table-borderless mb-0">
+                            <tbody>
+                            <tr>
+                                <th scope="row" class="w-50">Numéro</th>
+                                <td>{{ adress.number }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Rue</th>
+                                <td>{{ adress.street }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Code postal</th>
+                                <td>{{ adress.postalCode }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Ville</th>
+                                <td>{{ adress.city }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Complément d'adresse</th>
+                                <td>{{ adress.apt ?: '-' }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <a href="{{ path('app_adress_index') }}" class="btn btn-outline-primary">
+                            ← Retour à la liste
+                        </a>
+                        <div>
+                            <a href="{{ path('app_adress_edit', {'id': adress.id}) }}" class="btn btn-primary me-2">
+                                Modifier
+                            </a>
+                            {{ include('adress/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

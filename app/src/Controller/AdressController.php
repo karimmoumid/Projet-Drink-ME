@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Adress;
 use App\Form\AdressForm;
 use App\Repository\AdressRepository;
+use App\Service\AddressManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,7 +20,7 @@ final class AdressController extends AbstractController
     public function index(AdressRepository $adressRepository): Response
     {
         return $this->render('adress/index.html.twig', [
-            'adresses' => $adressRepository->findAll(),
+            'adresses' => $adressRepository->findBy(['users' => $this->getUser()]),
         ]);
     }
 
@@ -28,8 +30,8 @@ final class AdressController extends AbstractController
         $adress = new Adress();
         $form = $this->createForm(AdressForm::class, $adress);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $adress->setUsers($this->getUser());
             $entityManager->persist($adress);
             $entityManager->flush();
 
@@ -77,5 +79,24 @@ final class AdressController extends AbstractController
         }
 
         return $this->redirectToRoute('app_adress_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/favorite', name: 'address_set_favorite', methods: ['POST'])]
+    public function setFavorite(
+        Adress $address,
+        AddressManager $addressManager,
+        Request $request
+    ): JsonResponse {
+        // Optionnel : vérifier que l'utilisateur courant est bien propriétaire de l'adresse
+        $user = $this->getUser();
+
+        if ($address->getUsers() !== $user) {
+            return new JsonResponse(['error' => 'Accès refusé.'], 403);
+        }
+
+        // Appelle le service pour gérer la logique
+        $addressManager->setFavoriteAddress($address);
+
+        return new JsonResponse(['success' => true]);
     }
 }

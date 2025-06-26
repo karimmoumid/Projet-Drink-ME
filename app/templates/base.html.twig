@@ -14,7 +14,6 @@
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body>
@@ -89,7 +88,7 @@
                                 </li>
                             {% endif %}
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Mes adresses</a>
+                                <a class="nav-link" href="{{ path('app_adress_index') }}">Mes adresses</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Commandes</a>

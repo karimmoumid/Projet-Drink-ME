@@ -39,6 +39,9 @@ class Adress
     #[ORM\ManyToOne(inversedBy: 'adress')]
     private ?User $users = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isFavorite = null;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -147,6 +150,18 @@ class Adress
     public function setUsers(?User $users): static
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    public function isFavorite(): ?bool
+    {
+        return $this->isFavorite;
+    }
+
+    public function setIsFavorite(?bool $isFavorite): static
+    {
+        $this->isFavorite = $isFavorite;
 
         return $this;
     }

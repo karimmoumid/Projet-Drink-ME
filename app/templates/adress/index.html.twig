@@ -1,43 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Adress index{% endblock %}
+{% block title %}Liste des adresses{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset("js/adress_index.js") }}" defer></script>
+{% endblock %}
 
 {% block body %}
-    <h1>Adress index</h1>
+    <div class="container my-5">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Postal_code</th>
-                <th>City</th>
-                <th>Street</th>
-                <th>Apt</th>
-                <th>Number</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for adress in adresses %}
-            <tr>
-                <td>{{ adress.id }}</td>
-                <td>{{ adress.postalCode }}</td>
-                <td>{{ adress.city }}</td>
-                <td>{{ adress.street }}</td>
-                <td>{{ adress.apt }}</td>
-                <td>{{ adress.number }}</td>
-                <td>
-                    <a href="{{ path('app_adress_show', {'id': adress.id}) }}">show</a>
-                    <a href="{{ path('app_adress_edit', {'id': adress.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3">📍 Mes adresses</h1>
+            <a href="{{ path('app_adress_new') }}" class="btn btn-success">📥 Ajouter une nouvelle adresse</a>
+        </div>
 
-    <a href="{{ path('app_adress_new') }}">Create new</a>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle text-center">
+                <thead class="table-dark">
+                <tr>
+                    <th>Numéro</th>
+                    <th>Rue</th>
+                    <th>Code postal</th>
+                    <th>Ville</th>
+                    <th>Complément</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for adress in adresses %}
+                    <tr>
+                        <td>{{ adress.number }}</td>
+                        <td>{{ adress.street }}</td>
+                        <td>{{ adress.postalCode }}</td>
+                        <td>{{ adress.city }}</td>
+                        <td>{{ adress.apt ?: '-' }}</td>
+                        <td>
+                            <div class="d-grid gap-1">
+                                <a href="{{ path('app_adress_show', {'id': adress.id}) }}" class="btn btn-outline-primary btn-sm">📖 Voir</a>
+                                <a href="{{ path('app_adress_edit', {'id': adress.id}) }}" class="btn btn-outline-warning btn-sm">📝 Modifier</a>
+
+                                {% if adress.isFavorite %}
+                                    <span class="badge bg-success w-100 py-2 mt-1">✔ Adresse principale</span>
+                                {% else %}
+                                    <button class="btn btn-outline-secondary btn-sm favorite unselected w-100" data-id="{{ adress.id }}">
+                                        ➕ Définir comme principale
+                                    </button>
+                                {% endif %}
+
+                                <div class="mt-2">
+                                    {{ include('adress/_delete_form.html.twig') }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="text-muted text-center">Aucune adresse enregistrée.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
 {% endblock %}

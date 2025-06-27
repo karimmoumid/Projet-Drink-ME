@@ -87,12 +87,14 @@
                                     <a class="nav-link" href="{{ path('app_user_params') }}">Services</a>
                                 </li>
                             {% endif %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_adress_index') }}">Mes adresses</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Commandes</a>
-                            </li>
+                            {% if is_granted('ROLE_CUSTUMER') %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_adress_index') }}">Mes adresses</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Commandes</a>
+                                </li>
+                            {% endif %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_user') }}">Pramétres du compte</a>
                             </li>

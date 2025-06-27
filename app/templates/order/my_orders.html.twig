@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Commandes</title>
+</head>
+<body>
+    <header>
+        <h1>Mes Commandes</h1>
+        <p>Retrouvez l'historique de toutes vos commandes</p>
+    </header>
+
+    <main>
+        {% if orders is empty %}
+            <section>
+                <h2>Aucune commande</h2>
+                <p>Vous n'avez pas encore passé de commande.</p>
+            </section>
+        {% else %}
+            {% for order in orders %}
+                <article>
+                    <header>
+                        <h2>Commande #{{ order.id }}</h2>
+                        <p>Commandée le {{ order.date|date('d/m/Y') }}</p>
+                    </header>
+
+                    <section>
+                        <h3>Informations de commande</h3>
+                        <dl>
+                            <dt>Statut</dt>
+                            <dd>
+                                {% if order.validation == 'validated' and order.paye %}
+                                    Validée et payée
+                                {% elseif order.validation == 'validated' and not order.paye %}
+                                    Validée - En attente de paiement
+                                {% else %}
+                                    En cours de validation
+                                {% endif %}
+                            </dd>
+
+                            <dt>Paiement</dt>
+                            <dd>{{ order.paye ? 'Payé' : 'En attente de paiement' }}</dd>
+
+                            <dt>Délai de livraison</dt>
+                            <dd>{{ order.delivery_time }}</dd>
+
+                            <dt>Date limite de livraison</dt>
+                            <dd>{{ order.delivry_max_date|date('d/m/Y') }}</dd>
+                        </dl>
+                    </section>
+
+                    <section>
+                        <h3>Adresse de livraison</h3>
+                        <address>
+                            {{ order.adress.number }} {{ order.adress.street }}{% if order.adress.apt %}, {{ order.adress.apt }}{% endif %}<br>
+                            {{ order.adress.postal_code }} {{ order.adress.city }}
+                        </address>
+                    </section>
+
+                    <section>
+                        <h3>Produits commandés</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Produit</th>
+                                    <th>Prix</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% set total = 0 %}
+                                {% for product in order.products %}
+                                    {% set total = total + product.price %}
+                                    <tr>
+                                        <td>
+                                            {% if product.image %}
+                                                <img src="{{ product.image }}" alt="{{ product.title }}" width="80" height="80">
+                                            {% else %}
+                                                <span>Pas d'image</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ product.title }}</td>
+                                        <td>{{ product.price|number_format(2, ',', ' ') }} €</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="2">Total de la commande</th>
+                                    <th>{{ total|number_format(2, ',', ' ') }} €</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </section>
+                </article>
+
+                {% if not loop.last %}
+                    <hr>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </main>
+</body>
+</html>

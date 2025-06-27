@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une nouvelle adresse{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1 class="mb-4 text-center">Créer une nouvelle adresse</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                {{ include('adress/_form.html.twig') }}
+
+                <div class="mt-4 text-center">
+                    <a href="{{ path('app_adress_index') }}" class="btn btn-outline-secondary">
+                        ← Retour vers la liste des adresses
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
